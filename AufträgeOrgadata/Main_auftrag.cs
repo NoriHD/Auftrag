@@ -222,8 +222,8 @@ namespace AufträgeOrgadata
         public void donglestamm()
         {
             MainWindow main = Application.Current.MainWindow as MainWindow;
-            Get_set.Tstamm stamm = main.GetStammSet();
-            Get_set.TAusstattung_Data ausstattung = main.GetAusstattungSet();
+            Get_set.TstammList stamm = main.GetStammListSet();
+            Get_set.TAusstattung_List ausstattung = main.GetAusstattungListSet();
             Get_set.TLastIdentityDongle ldongle = GetLastDongle();
 
             login lgn = new login();
@@ -251,17 +251,28 @@ namespace AufträgeOrgadata
                 cmd.CommandText = sql;
 
                 cmd.Parameters.AddWithValue("?DongleID", ldongle.id);
-                
+                cmd.Parameters.AddWithValue("?StammdatenID", MySqlDbType.Int64);
+                cmd.Parameters.AddWithValue("?AusstattungID", MySqlDbType.Int64);
+
                 for (int i = 0; i < stamm.StammListUebergabe.Count; i++)
                 {
-                    //MySqlParameter para = new MySqlParameter();
-                    //para.ParameterName = "?StammdatenID";
-                    //para.Value = stamm.StammListUebergabe[i].id;
+                    if (Convert.ToInt64(stamm.StammListUebergabe[i]) >= i)
+                    {
+                        cmd.Parameters["?StammdatenID"].Value = stamm.StammListUebergabe[i].id;
+                    }
+                    else
+                    {
+                        cmd.Parameters["?StammdatenID"].Value = "";
+                    }
 
-                    cmd.Parameters.Add(new MySqlParameter("?StammdatenID", stamm.StammListUebergabe[i].id));
-                    cmd.Parameters["?StammdatenID"].Value = stamm.StammListUebergabe[i].id;
-                    //cmd.Parameters.AddWithValue("?StammdatenID", stamm.StammListUebergabe[i].id);
-                    cmd.Parameters.AddWithValue("?AusstattungID",ausstattung.Ausstattung_DataList[i].id);
+                    if (Convert.ToInt64(ausstattung.Ausstattung_DataList[i]) >= i)
+                    {
+                        cmd.Parameters["?AusstattungID"].Value = ausstattung.Ausstattung_DataList[i].id;
+                    }
+                    else
+                    {
+                        cmd.Parameters["?AusstattungID"].Value = "";
+                    }
 
                     cmd.Connection = conn;
                     cmd.ExecuteNonQuery();

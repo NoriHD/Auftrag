@@ -31,10 +31,14 @@ namespace AufträgeOrgadata
         private THandbuch sethandbuch = null;
         private TAnAdresse setanadresse = null;
         private TProgramms setpro = null;
+        private TProgrammsList setprolist = null;
         private TInstallArt setinstallart = null;
+        private TInstallList setinstalllist = null;
         private Twizt settwizt = null;
         private TAusstattung_Data setausstattung = null;
+        private TAusstattung_List setausstattunglist = null;
         private Tstamm setstamm = null;
+        private TstammList setstammlist = null;
         private TVNummer setvnum = null;
 
         public MainWindow()
@@ -139,9 +143,19 @@ namespace AufträgeOrgadata
             return setpro;
         }
 
+        public Get_set.TProgrammsList GetProgrammListSet()
+        {
+            return setprolist;
+        }
+
         public Get_set.TInstallArt GetInstallArtSet()
         {
             return setinstallart;
+        }
+
+        public Get_set.TInstallList GetInstallListSet()
+        {
+            return setinstalllist;
         }
 
         public Get_set.Twizt GetTwiztSet()
@@ -154,11 +168,19 @@ namespace AufträgeOrgadata
             return setausstattung;
         }
 
+        public Get_set.TAusstattung_List GetAusstattungListSet()
+        {
+            return setausstattunglist;
+        }
         public Get_set.Tstamm GetStammSet()
         {
             return setstamm;
         }
 
+        public Get_set.TstammList GetStammListSet()
+        {
+            return setstammlist;
+        }
         public Get_set.TVNummer GetVNumSet()
         {
             return setvnum;
@@ -396,8 +418,8 @@ namespace AufträgeOrgadata
 
             //Auslesen Programm Daten ID & Name
             ProgrammName PName = new ProgrammName();
-            setpro = new TProgramms();
-            setpro.ProList = new List<TProgramms>();
+            setprolist = new TProgrammsList();
+            setprolist.ProList = new List<TProgramms>();
             bool atleastOneChecked = false;
 
             for (int i = 0; i < PName.ProgrammListe.Count; i++)
@@ -407,11 +429,12 @@ namespace AufträgeOrgadata
                 if (checkbox.IsChecked == true)
                 {
                     //Zuweisen der Programm Daten
+                    setpro = new TProgramms();
                     setpro.id = Convert.ToString(PName.ProgrammListe[i].ID);
                     setpro.name = checkbox.Content.ToString();
 
                     //Ausgelesende Daten in eine Liste hinzufügen
-                    setpro.ProList.Add(setpro);
+                    setprolist.ProList.Add(setpro);
                     atleastOneChecked = true;
                 }
             }
@@ -423,8 +446,8 @@ namespace AufträgeOrgadata
 
             //Auslesen Installationsarten ID & Name
             Installationsart art = new Installationsart();
-            setinstallart = new TInstallArt();
-            setinstallart.InstallList = new List<TInstallArt>();
+            setinstalllist = new TInstallList();
+            setinstalllist.InstallList = new List<TInstallArt>();
             bool atChecked = false;
             for (int i = 0; i < art.Installationsliste.Count; i++)
             {
@@ -433,11 +456,12 @@ namespace AufträgeOrgadata
                 if (checkbox.IsChecked == true)
                 {
                     //Zuweisen der Installationsarten
+                    setinstallart = new TInstallArt();
                     setinstallart.id = Convert.ToString(art.Installationsliste[i].ID);
                     setinstallart.installart = checkbox.Content.ToString();
+                    setinstalllist.InstallList.Add(setinstallart);
 
                     //Ausgelesende Daten in eine Liste hinzufügen
-                    setinstallart.InstallList.Add(setinstallart);
                     atChecked = true;
                 }
             }
@@ -469,8 +493,8 @@ namespace AufträgeOrgadata
 
             //Auslesen StammDaten ID & Name
             StammName daten = new StammName();
-            setstamm = new Tstamm();
-            setstamm.StammListUebergabe = new List<Tstamm>();
+            setstammlist = new TstammList();
+            setstammlist.StammListUebergabe = new List<Tstamm>();
             bool atCheckedStamm = false;
             for (int i = 0; i < daten.StammListe.Count; i++)
             {
@@ -479,11 +503,12 @@ namespace AufträgeOrgadata
                 if (checkbox.IsChecked == true)
                 {
                     //Zuweisen der Stammdaten
+                    setstamm = new Tstamm();
                     setstamm.id = Convert.ToString(daten.StammListe[i].ID);
                     setstamm.name = checkbox.Content.ToString();
 
                     //Ausgelesende Daten in eine Liste hinzufügen
-                    setstamm.StammListUebergabe.Add(setstamm);
+                    setstammlist.StammListUebergabe.Add(setstamm);
                     atCheckedStamm = true;
                 }
             }
@@ -493,8 +518,8 @@ namespace AufträgeOrgadata
             }
 
             Ausstattung aus = new Ausstattung();
-            setausstattung = new TAusstattung_Data();
-            setausstattung.Ausstattung_DataList = new List<TAusstattung_Data>();
+            setausstattunglist = new TAusstattung_List();
+            setausstattunglist.Ausstattung_DataList = new List<TAusstattung_Data>();
 
             bool atCheckedAusstattung = false;
             for (int i = 0; i < aus.Ausstattungsliste.Count; i++)
@@ -504,11 +529,12 @@ namespace AufträgeOrgadata
                 if (checkbox.IsChecked == true)
                 {
                     //Zuweisen der Ausstattung
+                    setausstattung = new TAusstattung_Data();
                     setausstattung.id = Convert.ToString(aus.Ausstattungsliste[i].ID);
                     setausstattung.name = checkbox.Content.ToString();
 
                     //Ausgelesende Daten in eine Liste hinzufügen
-                    setausstattung.Ausstattung_DataList.Add(setausstattung);
+                    setausstattunglist.Ausstattung_DataList.Add(setausstattung);
                     atCheckedAusstattung = true;
 
                 }
