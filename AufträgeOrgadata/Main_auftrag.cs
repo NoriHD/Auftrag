@@ -114,7 +114,7 @@ namespace AufträgeOrgadata
             }
         }
 
-        //1
+        //1.
         public void dongle()
         {
             MainWindow main = Application.Current.MainWindow as MainWindow;
@@ -256,7 +256,10 @@ namespace AufträgeOrgadata
 
                 for (int i = 0; i < stamm.StammListUebergabe.Count; i++)
                 {
-                    if (Convert.ToInt64(stamm.StammListUebergabe[i]) >= i)
+                    MessageBox.Show(Convert.ToString(stamm.StammListUebergabe[i].id));
+                    MessageBox.Show(Convert.ToString(ausstattung.Ausstattung_DataList[i].id));
+
+                    if (stamm.StammListUebergabe[i] != null)
                     {
                         cmd.Parameters["?StammdatenID"].Value = stamm.StammListUebergabe[i].id;
                     }
@@ -265,7 +268,7 @@ namespace AufträgeOrgadata
                         cmd.Parameters["?StammdatenID"].Value = "";
                     }
 
-                    if (Convert.ToInt64(ausstattung.Ausstattung_DataList[i]) >= i)
+                    if (ausstattung.Ausstattung_DataList[i] != null)
                     {
                         cmd.Parameters["?AusstattungID"].Value = ausstattung.Ausstattung_DataList[i].id;
                     }

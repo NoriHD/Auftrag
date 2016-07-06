@@ -49,7 +49,6 @@ namespace AufträgeOrgadata
         private void Program_Loaded(object sender, RoutedEventArgs e)
         {
             ProgrammName programme = new ProgrammName();
-            //Boolean CheckStatus;
 
             for (int i = 0; i < programme.ProgrammListe.Count; i++)
             {
@@ -100,7 +99,6 @@ namespace AufträgeOrgadata
                 cb.Content = Auss.Ausstattungsliste[i].Ausstatung;
                 wpanelAusstattung.Children.Add(cb);
             }
-
         }
 
         public Get_set.TDateTime GetDateTimeSet()
@@ -386,10 +384,10 @@ namespace AufträgeOrgadata
                 MessageBox.Show("Kein Programm ausgewählt");
                 ProgrammGrid.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
             }
-
             else
+            {
                 ProgrammGrid.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-
+            }
         }
 
         private void mstamm_Click(object sender, RoutedEventArgs e)
@@ -441,7 +439,6 @@ namespace AufträgeOrgadata
 
             if (atleastOneChecked == false)
             {
-
             }
 
             //Auslesen Installationsarten ID & Name
@@ -536,9 +533,7 @@ namespace AufträgeOrgadata
                     //Ausgelesende Daten in eine Liste hinzufügen
                     setausstattunglist.Ausstattung_DataList.Add(setausstattung);
                     atCheckedAusstattung = true;
-
                 }
-
             }
 
             if (atCheckedAusstattung == false)
