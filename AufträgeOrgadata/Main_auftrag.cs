@@ -114,7 +114,7 @@ namespace AufträgeOrgadata
             }
         }
 
-        //1.
+        //1
         public void dongle()
         {
             MainWindow main = Application.Current.MainWindow as MainWindow;
